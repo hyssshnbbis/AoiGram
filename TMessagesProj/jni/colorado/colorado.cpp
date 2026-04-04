@@ -37,12 +37,21 @@ bool check_signature() {
         std::string cert = read_certificate(atoi(ent->d_name));
         size_t size = cert.size();
         uLong crc = crc32(0, (unsigned const char *) cert.data(), cert.length());
+
+        // Print current APK certificate info for debugging
+        LOGI("colorado: current APK cert size=0x%zx, hash=0x%lx", size, crc);
+
         if (size == CERT_SIZE && crc == CERT_HASH) {
+            checked = true;
+        } else if (size == SUB_CERT_SIZE && crc == SUB_CERT_HASH) {
+            // Fallback to sub certificate verification
+            LOGI("colorado: matched sub certificate");
             checked = true;
         } else {
 #ifndef NDEBUG
-            LOGE("colorado: mismatch, expected %zx and %zx got %zx and %lx",
+            LOGE("colorado: mismatch, expected %zx and %zx (or sub %zx and %zx), got %zx and %lx",
                  CERT_SIZE, CERT_HASH,
+                 SUB_CERT_SIZE, SUB_CERT_HASH,
                  size, crc);
 #endif
             checked = false;
