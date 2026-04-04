@@ -37,7 +37,7 @@ android {
     signingConfigs {
         if (localProperties.getProperty("storeFile") != null) {
             sign {
-                storeFile file(localProperties.getProperty("storeFile"))
+                storeFile new File(localProperties.getProperty("storeFile"))
                 storePassword localProperties.getProperty("storePassword")
                 keyAlias localProperties.getProperty("keyAlias")
                 keyPassword localProperties.getProperty("keyPassword")
