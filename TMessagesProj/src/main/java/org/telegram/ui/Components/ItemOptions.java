@@ -72,6 +72,7 @@ import org.telegram.ui.Components.blur3.drawable.color.BlurredBackgroundProvider
 import org.telegram.ui.Components.blur3.drawable.color.impl.BlurredBackgroundProviderImpl;
 import org.telegram.ui.Components.blur3.source.BlurredBackgroundSourceBitmap;
 import org.telegram.ui.Components.blur3.utils.Blur3Utils;
+import org.telegram.ui.Components.chat.ViewPositionWatcher;
 import org.telegram.ui.ContactsActivity;
 import org.telegram.ui.DialogsActivity;
 import org.telegram.ui.Gifts.GiftSheet;
@@ -1378,14 +1379,15 @@ public class ItemOptions {
 
         if (blurForMenu && scrimBlur3SourceBitmap != null) {
             setGapBackgroundColor(Theme.multAlpha(Theme.getColor(Theme.key_actionBarDefaultSubmenuItem, resourcesProvider), 0.06f));
-            BlurredBackgroundDrawable bg = new BlurredBackgroundDrawableViewFactory(scrimBlur3SourceBitmap)
+            BlurredBackgroundDrawableViewFactory factory = new BlurredBackgroundDrawableViewFactory(scrimBlur3SourceBitmap);
+            factory.setSourceRootView(new ViewPositionWatcher(container), container);
+            BlurredBackgroundDrawable bg = factory
                 .create(layout, true)
                 .setColorProvider(BlurredBackgroundProviderImpl.scrimMenuBackground(resourcesProvider))
                 .setPadding(dp(8))
                 .setHasPadding(true)
                 .setRadius(dp(12));
 
-            bg.setSourceOffset(X + this.translateX, Y + this.translateY);
             layout.setBackground(bg);
         }
 
