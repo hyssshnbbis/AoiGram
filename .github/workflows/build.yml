@@ -70,8 +70,10 @@ jobs:
         run: |
           echo "apiId=${{ secrets.API_ID }}" >> local.properties
           echo "apiHash=${{ secrets.API_HASH }}" >> local.properties
+          echo "playstoreAppUrl=${{ secrets.PLAYSTORE_APP_URL }}" >> local.properties
           echo "helperBotId=${{ secrets.HELPER_BOT_ID }}" >> local.properties
           echo "helperBotUsername=${{ secrets.HELPER_BOT_USERNAME }}" >> local.properties
+          echo "tlvUrl=${{ secrets.TLV_URL }}" >> local.properties
           echo "sentryDsn=${{ secrets.SENTRY_DSN }}" >> local.properties
 
           echo "${{ secrets.SENTRY_PROPERTIES }}" | base64 --decode > sentry.properties

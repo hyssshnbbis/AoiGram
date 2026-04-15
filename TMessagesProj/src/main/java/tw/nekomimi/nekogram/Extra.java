@@ -3,14 +3,19 @@ package tw.nekomimi.nekogram;
 import org.lsposed.lsparanoid.Obfuscate;
 import org.telegram.messenger.BuildConfig;
 
+import java.util.List;
+
 import tw.nekomimi.nekogram.helpers.UserHelper;
+import tw.nekomimi.nekogram.helpers.remote.ConfigHelper;
 
 @Obfuscate
 public class Extra {
 
     public static int APP_ID = BuildConfig.API_ID;
     public static String APP_HASH = BuildConfig.API_HASH;
+    public static final String PLAYSTORE_APP_URL = BuildConfig.PLAYSTORE_APP_URL;
     public static String TWPIC_BOT_USERNAME = BuildConfig.TWPIC_BOT_USERNAME;
+    public static String TLV_URL = BuildConfig.TLV_URL;
     public static String SENTRY_DSN = BuildConfig.SENTRY_DSN;
 
     public static boolean FORCE_ANALYTICS = "play".equals(BuildConfig.BUILD_TYPE);
@@ -26,6 +31,10 @@ public class Extra {
             return BuildConfig.HELPER_BOT_USERNAME;
         }
     };
+
+    public static List<ConfigHelper.News> getDefaultNews() {
+        return null;
+    }
 
     public static UserHelper.BotInfo getHelperBot() {
         return HELPER_BOT;

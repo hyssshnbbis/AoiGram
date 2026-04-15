@@ -30,8 +30,6 @@ import tw.nekomimi.nekogram.NekoConfig;
 public class WebAppHelper {
     public static final int INTERNAL_BOT_TLV = 1;
 
-    public static final String TLV_URL = "https://tlv.kokkoro.eu.org/";
-
     public static boolean isInternalBot(WebViewRequestProps props) {
         return props.internalType > 0;
     }
@@ -58,7 +56,7 @@ public class WebAppHelper {
         if (TextUtils.isEmpty(serialized)) {
             return;
         }
-        var url = TLV_URL + "#m=" + serialized + "&l=" + TLRPC.LAYER;
+        var url = Extra.TLV_URL + "#m=" + serialized + "&l=" + TLRPC.LAYER;
         openInternalWebApp(fragment, url, INTERNAL_BOT_TLV, true);
     }
 
