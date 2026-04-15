@@ -33,32 +33,57 @@ public class AnalyticsHelper {
 
     public static void start(Application application) {
         preferences = application.getSharedPreferences("nekoanalytics", Application.MODE_PRIVATE);
+
         analyticsDisabled = !Extra.FORCE_ANALYTICS && preferences.getBoolean("analyticsDisabled", false);
         sendBugReport = Extra.FORCE_ANALYTICS || preferences.getBoolean("sendBugReport", true);
+
         if (analyticsDisabled) {
-            FileLog.d("Analytics: userId = disabled");
+            FileLog.d("Analytics: disabled by user");
             return;
         }
+
         userId = preferences.getString("userId", null);
         if (userId == null || userId.length() < 32) {
-            preferences.edit().putString("userId", userId = generateUserID()).apply();
+            userId = generateUserID();
+            preferences.edit().putString("userId", userId).apply();
         }
+
         firebaseAnalytics = FirebaseAnalytics.getInstance(application);
         firebaseAnalytics.setAnalyticsCollectionEnabled(true);
         firebaseAnalytics.setUserId(userId);
-        SentryAndroid.init(application, options -> {
-            options.setDsn(Extra.SENTRY_DSN);
-            options.setEnvironment(BuildConfig.BUILD_TYPE);
-            options.setPrintUncaughtStackTrace(true);
-            options.setSendDefaultPii(true);
-            options.setEnableUserInteractionTracing(true);
-            options.setAttachViewHierarchy(true);
-            options.setEnableSystemEventBreadcrumbsExtras(true);
-            options.setTracesSampleRate(0.01);
-        });
-        var user = new User();
-        user.setId(userId);
-        Sentry.setUser(user);
+
+        String dsn = Extra.SENTRY_DSN;
+
+        boolean validDsn = false;
+        if (dsn != null && !dsn.isEmpty() && !dsn.contains("example.com")) {
+            try {
+                java.net.URI uri = new java.net.URI(dsn);
+                validDsn = uri.getHost() != null;
+            } catch (Exception ignore) {
+                validDsn = false;
+            }
+        }
+
+        if (validDsn) {
+            SentryAndroid.init(application, options -> {
+                options.setDsn(dsn);
+                options.setEnvironment(BuildConfig.BUILD_TYPE);
+                options.setPrintUncaughtStackTrace(true);
+                options.setSendDefaultPii(true);
+                options.setEnableUserInteractionTracing(true);
+                options.setAttachViewHierarchy(true);
+                options.setEnableSystemEventBreadcrumbsExtras(true);
+                options.setTracesSampleRate(0.01);
+            });
+
+            User user = new User();
+            user.setId(userId);
+            Sentry.setUser(user);
+
+            FileLog.d("Sentry initialized");
+        } else {
+            FileLog.d("Sentry disabled: invalid DSN");
+        }
 
         if (BuildVars.LOGS_ENABLED) {
             FileLog.d("Analytics: userId = " + userId);
