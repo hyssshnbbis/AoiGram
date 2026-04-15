@@ -22,8 +22,6 @@
     <string name="AddToSavedMessages">拿去自嗨</string>
     <string name="CreateMention">提及使用者</string>
     <string name="Prpr">ペロペロ</string>
-    <string name="EnableResidentNotification">請讓貓咪住在通知列裡吧</string>
-    <string name="DisableResidentNotification">果然通知列還是太擠了</string>
     <string name="NekogramRunning">貓貓奔跑中</string>
     <string name="EventType">抽屜圖示集</string>
     <string name="DependsOnDate">基於日期</string>
@@ -32,7 +30,6 @@
     <string name="DeleteDownloadedFile">刪除快取文件</string>
     <string name="TestBackendOn">此賬戶將連線至測試後端伺服器。</string>
     <string name="TestBackendOff">此賬戶將連線至生產後端伺服器。</string>
-    <string name="ViewHistory">顯示歷史訊息</string>
     <string name="Nya">喵！</string>
     <string name="StickerSize">貼圖大小</string>
     <string name="StickerSizeLeft">小</string>
@@ -265,10 +262,13 @@
     <string name="SendLargePhotos">傳送大照片</string>
     <string name="SendLargePhotosAbout">將壓縮影像的邊距限制增加到 2560 像素。</string>
     <string name="ExportAsJson">複製為 JSON</string>
+    <string name="ViewAsJson"></string>
     <string name="HideStories">隱藏動態</string>
     <string name="QuickForward">使用快速轉發選單</string>
     <string name="DidNotGetTheCodeBlameDurov">如果您沒有在其他裝置上取得驗證碼，或者您沒有在其他裝置上登入 Telegram，請使用官方 Telegram 應用程式接收驗證碼。\n\nTelegram 已**停用透過簡訊登入的功能** 在第三方應用程序上。 登入第三方應用程式的使用者只能透過 Telegram 接收登入代碼。\n\n我們無法協助您解決此問題，如果您在登入時遇到任何問題，請聯絡 Telegram 支援。</string>
     <string name="ChangePhoneNumberBlameDurov">Telegram **已禁止在第三方應用更改電話號碼**。用戶只能透過 Telegram 更改電話號碼。</string>
+    <string name="CreatePasskeyBlameDurov">Telegram 的通行密鑰功能目前僅在官方客戶端中提供。第三方客戶端暫不支持創建或使用此功能。</string>
+    <string name="OpenOfficialApp">打開官方客戶端</string>
     <string name="NavigationAnimation">導航動畫</string>
     <string name="NavigationAnimationBezier">經典</string>
     <string name="NavigationAnimationSpring">自然</string>
@@ -313,6 +313,14 @@
     <string name="AutoInlineBotDesc">根據訊息文字自動查詢 Inline 機器人。</string>
     <string name="ShortStandardQuality">SD</string>
     <string name="ForceFontWeightFallback">強制使用字重替代</string>
+    <string name="HideChannelBottomButtons">隱藏頻道底部按鈕</string>
+    <string name="TranslationKeepFormatting">保留原文格式</string>
+    <string name="PredictiveBackAnimation">預返回動畫</string>
+    <string name="HideBottomNavigationBar">隱藏底部導航欄</string>
+    <string name="TabsPosition">選項卡位置</string>
+    <string name="TabsPositionTop">頭部</string>
+    <string name="TabsPositionBottom">底部</string>
+    <string name="StrokeOnViews">炫光效果</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">無障礙設定</string>
 </resources>

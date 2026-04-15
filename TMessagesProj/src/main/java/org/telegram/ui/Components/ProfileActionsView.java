@@ -30,12 +30,13 @@ import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityNodeProvider;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
-import androidx.customview.widget.ExploreByTouchHelper;
+import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.ColorUtils;
@@ -47,6 +48,7 @@ import org.telegram.messenger.R;
 import org.telegram.messenger.SharedConfig;
 import org.telegram.messenger.Utilities;
 import org.telegram.ui.ActionBar.Theme;
+import org.telegram.ui.Cells.ChatMessageCell;
 import org.telegram.ui.ProfileActivity;
 
 import java.util.ArrayList;
@@ -78,8 +80,6 @@ public class ProfileActionsView extends View {
     private float currentHeight = 0;
 
     private OnActionClickListener onActionClickListener = null;
-
-    private final ProfileActionsTouchHelper touchHelper;
 
     private final Set<Integer> allAvailableActions = new HashSet<>();
 
@@ -144,8 +144,7 @@ public class ProfileActionsView extends View {
 
         setBackgroundColor(0);
 
-        touchHelper = new ProfileActionsTouchHelper(this);
-        ViewCompat.setAccessibilityDelegate(this, touchHelper);
+        setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
     }
 
     public void drawingBlur(boolean drawing) {
@@ -1284,83 +1283,113 @@ public class ProfileActionsView extends View {
         }
     }
 
+    private AccessibilityNodeProvider accessibilityNodeProvider;
     @Override
-    protected boolean dispatchHoverEvent(MotionEvent event) {
-        if (touchHelper.dispatchHoverEvent(event)) {
-            return true;
-        }
-        return super.dispatchHoverEvent(event);
-    }
+    public AccessibilityNodeProvider getAccessibilityNodeProvider() {
+        if (accessibilityNodeProvider == null) {
+            accessibilityNodeProvider = new AccessibilityNodeProvider() {
+                @Override
+                public AccessibilityNodeInfo createAccessibilityNodeInfo(int virtualViewId) {
+                    int[] pos = {0, 0};
+                    getLocationOnScreen(pos);
+                    if (virtualViewId == HOST_VIEW_ID) {
+                        AccessibilityNodeInfo info = AccessibilityNodeInfo.obtain(ProfileActionsView.this);
+                        onInitializeAccessibilityNodeInfo(info);
+                        info.setEnabled(true);
 
-    private class ProfileActionsTouchHelper extends ExploreByTouchHelper {
-        private final Rect rect = new Rect();
+                        for (int i = 0; i < actions.size(); ++i) {
+                            info.addChild(ProfileActionsView.this, actions.get(i).key);
+                        }
 
-        public ProfileActionsTouchHelper(View forView) {
-            super(forView);
-        }
-
-        @Override
-        protected int getVirtualViewAt(float x, float y) {
-            for (var profileAction: actions) {
-                if (!profileAction.isDeleting && profileAction.rect.contains(x, y)) {
-                    return profileAction.key;
-                }
-            }
-            return ExploreByTouchHelper.INVALID_ID;
-        }
-
-        @Override
-        protected void getVisibleVirtualViews(List<Integer> virtualViewIds) {
-            for (var profileAction: actions) {
-                if (!profileAction.isDeleting) {
-                    virtualViewIds.add(profileAction.key);
-                }
-            }
-        }
-
-        @Override
-        protected void onPopulateEventForVirtualView(int virtualViewId, @NonNull AccessibilityEvent event) {
-            var profileAction = getOrCreate(virtualViewId);
-            if (profileAction == null) return;
-
-            event.getText().add(profileAction.text.getText());
-        }
-
-        @Override
-        protected void onPopulateNodeForVirtualView(int virtualViewId, @NonNull AccessibilityNodeInfoCompat node) {
-            var profileAction = getOrCreate(virtualViewId);
-            if (profileAction == null) return;
-
-            node.setText(profileAction.text.getText());
-
-            profileAction.rect.round(rect);
-            node.setBoundsInParent(rect);
-
-            node.setClassName("android.widget.Button");
-            node.addAction(AccessibilityNodeInfoCompat.ACTION_CLICK);
-            node.setClickable(true);
-            node.setFocusable(true);
-            node.setParent(ProfileActionsView.this);
-        }
-
-        @Override
-        protected boolean onPerformActionForVirtualView(int virtualViewId, int action, Bundle arguments) {
-            if (action == AccessibilityNodeInfoCompat.ACTION_CLICK) {
-                if (onActionClickListener != null) {
-                    var profileAction = getOrCreate(virtualViewId);
-                    if (profileAction.callDelay == 0) {
-                        onActionClickListener.onClick(profileAction.key, profileAction.rect.left, profileAction.rect.top);
-                        touchHelper.sendEventForVirtualView(virtualViewId, AccessibilityEvent.TYPE_VIEW_CLICKED);
+                        return info;
                     } else {
-                        postDelayed(() -> {
-                            onActionClickListener.onClick(profileAction.key, profileAction.rect.left, profileAction.rect.top);
-                            touchHelper.sendEventForVirtualView(virtualViewId, AccessibilityEvent.TYPE_VIEW_CLICKED);
-                        }, profileAction.callDelay);
+                        Action action = null;
+                        for (int i = 0; i < actions.size(); ++i) {
+                            if (actions.get(i).key == virtualViewId) {
+                                action = actions.get(i);
+                                break;
+                            }
+                        }
+                        if (action == null) return null;
+                        if (action.rect.isEmpty()) return null;
+
+                        AccessibilityNodeInfo info = AccessibilityNodeInfo.obtain();
+                        info.setSource(ProfileActionsView.this, virtualViewId);
+                        info.setParent(ProfileActionsView.this);
+                        info.setPackageName(getContext().getPackageName());
+
+                        info.addAction(AccessibilityNodeInfo.ACTION_CLICK);
+                        info.addAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS);
+                        info.setClickable(true);
+                        info.setFocusable(true);
+                        info.setEnabled(true);
+                        info.setVisibleToUser(true);
+                        info.setClassName(android.widget.Button.class.getName());
+
+                        info.setText(action.text.getText());
+
+                        Rect parentBounds = new Rect(
+                                (int) action.rect.left,
+                                (int) action.rect.top,
+                                (int) action.rect.right,
+                                (int) action.rect.bottom
+                        );
+                        info.setBoundsInParent(parentBounds);
+                        parentBounds.offset(pos[0], pos[1]);
+                        info.setBoundsInScreen(parentBounds);
+
+                        return info;
                     }
-                    return true;
                 }
-            }
-            return false;
+
+                @Override
+                public boolean performAction(int virtualViewId, int action, @Nullable Bundle arguments) {
+                    if (virtualViewId == HOST_VIEW_ID) {
+                        return performAccessibilityAction(action, arguments);
+                    }
+
+                    Action button = null;
+                    for (int i = 0; i < actions.size(); ++i) {
+                        if (actions.get(i).key == virtualViewId) {
+                            button = actions.get(i);
+                            break;
+                        }
+                    }
+                    if (button == null) return false;
+
+                    if (action == AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) {
+                        sendAccessibilityEventForVirtualView(virtualViewId, AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED);
+                        return true;
+                    } else if (action == AccessibilityNodeInfo.ACTION_CLICK) {
+                        if (onActionClickListener != null) {
+                            onActionClickListener.onClick(virtualViewId, 0, 0);
+                        }
+                        return true;
+                    }
+
+                    return false;
+                }
+
+                private void sendAccessibilityEventForVirtualView(int viewId, int eventType) {
+                    sendAccessibilityEventForVirtualView(viewId, eventType, null);
+                }
+
+                private void sendAccessibilityEventForVirtualView(int viewId, int eventType, String text) {
+                    AccessibilityManager am = (AccessibilityManager) getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+                    if (am.isTouchExplorationEnabled()) {
+                        AccessibilityEvent event = AccessibilityEvent.obtain(eventType);
+                        event.setPackageName(getContext().getPackageName());
+                        event.setSource(ProfileActionsView.this, viewId);
+                        if (text != null) {
+                            event.getText().add(text);
+                        }
+                        if (getParent() != null) {
+                            getParent().requestSendAccessibilityEvent(ProfileActionsView.this, event);
+                        }
+                    }
+                }
+            };
         }
+        return accessibilityNodeProvider;
     }
 }

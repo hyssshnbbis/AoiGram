@@ -22,8 +22,6 @@
     <string name="AddToSavedMessages">Lưu tin nhắn</string>
     <string name="CreateMention">Tạo đề cập đến</string>
     <string name="Prpr">Biểu cảm dễ thương</string>
-    <string name="EnableResidentNotification">Hiển thị thông báo cư dân</string>
-    <string name="DisableResidentNotification">Vô hiệu hóa thông báo cư dân</string>
     <string name="NekogramRunning">Nekogram đang chạy</string>
     <string name="EventType">Bộ biểu tượng thanh bên</string>
     <string name="DependsOnDate">Phụ thuộc từng ngày</string>
@@ -32,7 +30,6 @@
     <string name="DeleteDownloadedFile">Xóa tệp đã tải xuống</string>
     <string name="TestBackendOn">Tài khoản này sẽ kết nối với phụ trợ thử nghiệm.</string>
     <string name="TestBackendOff">Tài khoản này sẽ kết nối với phụ trợ sản xuất.</string>
-    <string name="ViewHistory">Xem lịch sử</string>
     <string name="Nya">Meow!</string>
     <string name="StickerSize">Kích thước nhãn dán</string>
     <string name="StickerSizeLeft">Nhỏ</string>
@@ -269,6 +266,8 @@
     <string name="QuickForward">Sử dụng menu chuyển tiếp nhanh</string>
     <string name="DidNotGetTheCodeBlameDurov">Nếu bạn không nhận được mã trên thiết bị khác hoặc bạn chưa đăng nhập Telegram trên thiết bị khác, vui lòng sử dụng ứng dụng Telegram chính thức để nhận mã.\n\nTelegram đã **tắt khả năng đăng nhập bằng SMS ** trên ứng dụng của bên thứ ba. Người dùng đăng nhập vào ứng dụng của bên thứ ba chỉ có thể nhận mã đăng nhập qua Telegram.\n\nChúng tôi không thể giúp bạn vấn đề này, nếu bạn gặp bất kỳ vấn đề nào khi đăng nhập, vui lòng liên hệ với Bộ phận hỗ trợ của Telegram.</string>
     <string name="ChangePhoneNumberBlameDurov">Telegram đã **vô hiệu hoá khả năng thay đổi số điện thoại** trên các ứng dụng thứ ba. Người dùng chỉ có thể thay đổi số điện thoại qua ứng dụng Telegram chính thức.</string>
+    <string name="CreatePasskeyBlameDurov">Telegram không hỗ trợ Passkey trong các ứng dụng bên thứ ba. Người dùng chỉ có thể tạo và sử dụng Passkey thông qua Telegram.</string>
+    <string name="OpenOfficialApp">Mở ứng dụng chính thức</string>
     <string name="NavigationAnimation">Hoạt ảnh điều hướng</string>
     <string name="NavigationAnimationBezier">Cổ điển</string>
     <string name="NavigationAnimationSpring">Tự nhiên</string>
@@ -313,6 +312,14 @@
     <string name="AutoInlineBotDesc">Truy vấn bot bằng cách dựa trên cú pháp tin nhắn.</string>
     <string name="ShortStandardQuality">Chất lượng cơ bản, ngắn gọn</string>
     <string name="ForceFontWeightFallback">Buộc kiểu chữ sử dụng độ đậm mặc định</string>
+    <string name="HideChannelBottomButtons">Ẩn nút dưới màn hình của kênh</string>
+    <string name="TranslationKeepFormatting">Giữ nguyên định dạng kí tự khi dịch</string>
+    <string name="PredictiveBackAnimation">Hiệu ứng quay lại dự đoán</string>
+    <string name="HideBottomNavigationBar">Ẩn thanh định hướng dưới màn hình</string>
+    <string name="TabsPosition">Vị trí các tab</string>
+    <string name="TabsPositionTop">Trên cùng</string>
+    <string name="TabsPositionBottom">Dưới cùng</string>
+    <string name="StrokeOnViews">Hiệu ứng chói sáng</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Cài đặt trợ năng</string>
 </resources>

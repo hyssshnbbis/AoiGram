@@ -1415,11 +1415,32 @@ public class TranslateAlert2 extends BottomSheet implements NotificationCenter.N
         return builder;
     }
 
+    public static String lowerFirst(String text) {
+        if (text == null || text.length() <= 0) {
+            return null;
+        }
+        return text.substring(0, 1).toLowerCase() + text.substring(1);
+    }
+
+    public static CharSequence lowerFirst(CharSequence text) {
+        if (text == null || text.length() <= 0) {
+            return null;
+        }
+        SpannableStringBuilder builder = text instanceof SpannableStringBuilder ? (SpannableStringBuilder) text : SpannableStringBuilder.valueOf(text);
+        String string = builder.toString();
+        builder.replace(0, 1, string.substring(0, 1).toLowerCase());
+        return builder;
+    }
+
     public static String languageName(String locale) {
-        return languageName(locale, null);
+        return languageName(locale, null, null);
     }
 
     public static String languageName(String locale, boolean[] accusative) {
+        return languageName(locale, accusative, null);
+    }
+
+    public static String languageName(String locale, boolean[] accusative, boolean[] genitive) {
         if (locale == null || locale.equals(TranslateController.UNKNOWN_LANGUAGE) || locale.equals("auto")) {
             return null;
         }

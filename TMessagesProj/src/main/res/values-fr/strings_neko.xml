@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="NekoSettings">Paramètres Neko</string>
+    <string name="PreferIPv6">Préférer la connexion par IPv6</string>
     <string name="MessageMenu">Menu des messages</string>
     <string name="HidePhone">Masquer mon numéro de téléphone</string>
     <string name="DeleteAllFromSelf">Supprimer ses propres messages</string>
@@ -21,8 +22,6 @@
     <string name="AddToSavedMessages">Sauvegarder le message</string>
     <string name="CreateMention">Créer une mention</string>
     <string name="Prpr">Peropero</string>
-    <string name="EnableResidentNotification">Afficher une notification de résident</string>
-    <string name="DisableResidentNotification">Désactiver la notification de résident</string>
     <string name="NekogramRunning">Nekogram est en cours d\'exécution</string>
     <string name="EventType">Icônes de la barre latérale</string>
     <string name="DependsOnDate">Selon la date</string>
@@ -31,13 +30,12 @@
     <string name="DeleteDownloadedFile">Supprimer des fichiers téléchargés</string>
     <string name="TestBackendOn">Ce compte se connectera au serveur de test.</string>
     <string name="TestBackendOff">Ce compte sera déconnecter du serveur de test.</string>
-    <string name="ViewHistory">Afficher l\'historique</string>
-    <string name="Nya">Meow !</string>
+    <string name="Nya">Miaou !</string>
     <string name="StickerSize">Taille des autocollants</string>
     <string name="StickerSizeLeft">Petit</string>
     <string name="StickerSizeRight">Grand</string>
     <string name="StickerSizeDialogMessage">Oh trop mignon ! Un chat noir !</string>
-    <string name="StickerSizeDialogMessageReplyTo">Meow</string>
+    <string name="StickerSizeDialogMessageReplyTo">Miaou</string>
     <string name="Experiment">Expérimental</string>
     <string name="MessageDetails">Détail</string>
     <string name="DeleteAccount">Effacer le compte Telegram</string>
@@ -116,8 +114,6 @@
     <string name="RegistrationDateNewer">Plus récent que %s</string>
     <string name="RegistrationDateOlder">Plus ancien que %s</string>
     <string name="RegistrationDateApproximately">Environ %s</string>
-    <string name="WsEnableTls">Activer le TLS</string>
-    <string name="WsProvider">Fournisseur</string>
     <string name="UpdateNekogram">Mettre à jour Nekogram</string>
     <string name="TranslationTarget">Langue cible</string>
     <string name="TranslationTargetApp">Comme l\'application</string>
@@ -156,6 +152,7 @@
     <string name="QRLoginTitle">Connexion avec QR Code</string>
     <string name="NoTranslatorAppInstalled">Vous n\'avez pas d\'applications capables de traduire, veuillez en installer une pour continuer</string>
     <string name="DisableVoiceMessagesAutoPlay">Désactiver la lecture automatique des vocaux</string>
+    <string name="UnmuteVideosWithVolumeButtons">Rallumer le son des vidéos avec les boutons volume</string>
     <string name="TranslatorType">Type</string>
     <string name="TranslatorTypeNeko">Dans le message</string>
     <string name="TranslatorTypeTG">Boîte de dialogue</string>
@@ -257,15 +254,21 @@
     <string name="SendAnonymousData">Envoyer des données anonymes</string>
     <string name="SendBugReport">Envoyer un rapport de bug</string>
     <string name="SendBugReportDesc">Cela nous aidera à trouver les problèmes plus rapidement.</string>
+    <string name="CopyReportId">Copier l\'ID du rapport</string>
+    <string name="CopyReportIdDescription">Joindre l\'ID lors du rapport de crash</string>
     <string name="AnonymousDataDelete">Supprimer les données</string>
     <string name="AnonymousDataDeleteDesc">Bloquer de façon permanente les données sortantes de cette instance et supprimer les données collectées.</string>
     <string name="SendAnonymousDataDesc">Les fonctions ci-dessus utilisent le site %1$s fourni par %2$s. Les informations collectées sont anonymes et nous ne pouvons pas les relier à un appareil ou à un utilisateur indépendant.</string>
     <string name="SendLargePhotos">Envoyer des photos de grande taille</string>
     <string name="SendLargePhotosAbout">Augmenter la limite de taille des images compressées à 2560px.</string>
     <string name="ExportAsJson">Copier en JSON</string>
+    <string name="ViewAsJson">Voir en JSON</string>
     <string name="HideStories">Cacher les stories</string>
     <string name="QuickForward">Utiliser le menu d\'avance rapide</string>
     <string name="DidNotGetTheCodeBlameDurov">Si vous n\'avez pas reçu le code sur un autre appareil ou si vous n\'êtes pas connecté à Telegram sur un autre appareil, veuillez utiliser l\'application officielle de Telegram pour recevoir le code.\n\nTelegram a désactivé sur **la possibilité de se connecter par SMS** sur des applications tierces. Les utilisateurs qui se connectent à des applications tierces ne peuvent recevoir des codes de connexion que via Telegram.\n\nNous ne pouvons pas vous aider à cet égard. Si vous avez des problèmes de connexion, veuillez contacter le service d\'assistance de Telegram.</string>
+    <string name="ChangePhoneNumberBlameDurov">Telegram a **désactivé la possibilité de changer le numéro de téléphone** sur les applis tierces. Les utilisateurs ne peuvent changer de numéro que via Telegram.</string>
+    <string name="CreatePasskeyBlameDurov">Telegram ne gère pas les clés d\'accès sur les applis tierces. Les utilisateurs ne peuvent créer et utiliser des clés d\'accès uniquement que via Telegram.</string>
+    <string name="OpenOfficialApp">Ouvrir l\'app officielle</string>
     <string name="NavigationAnimation">Animation de navigation</string>
     <string name="NavigationAnimationBezier">Classique</string>
     <string name="NavigationAnimationSpring">Naturel</string>
@@ -287,6 +290,37 @@
     <string name="CreateCode">Créer un code</string>
     <string name="CreateCodeLanguage">Langue</string>
     <string name="IgnoreContentRestriction">Ignorer la restriction de contenu</string>
+    <string name="PreviewSendPhoto">Envoyer la photo</string>
+    <string name="PreviewSendVideo">Envoyer la vidéo</string>
+    <string name="PreviewSendFile">Envoyer le fichier</string>
+    <string name="FixLinkPreview">Corriger l\'aperçu du lien</string>
+    <string name="FixLinkPreviewDesc">Envoyer les liens d\'autres réseaux sociaux avec l\'aperçu des liens corrigés</string>
+    <string name="ShowTimeHint">Afficher l\'info de d\'heure</string>
+    <string name="ShowTimeHintDesc">Afficher le détail de la date d\'envoi en touchant l\'heure</string>
+    <string name="Cryptocurrency">Crypto-monnaie</string>
+    <string name="TranscribeProviderShort">Fournisseur</string>
+    <string name="TranscribeProviderAuto">Sélection automatique</string>
+    <string name="TranscribeProviderWorkersAI">Whisper (Workers AI)</string>
+    <string name="TranscribeProviderDesc">Avec la sélection automatique, %s sera utilisé quand Telegram Premium n\'est pas disponible.</string>
+    <string name="CloudflareCredentials">Identifiants Cloudflare</string>
+    <string name="CloudflareCredentialsNotSet">Les identifiants Cloudflare ne sont pas configurés.</string>
+    <string name="CloudflareAccountID">ID du compte</string>
+    <string name="CloudflareAPIToken">Token d\'API</string>
+    <string name="CloudflareCredentialsDialog">Configurer l\'ID du compte Cloudflare et le token d\'API.\n**Comment l\'obtenir ?**</string>
+    <string name="PreferOriginalQuality">Préférer la qualité originale</string>
+    <string name="PreferOriginalQualityDesc">Voir les vidéos en qualité originale.</string>
+    <string name="AutoInlineBot">Bot inline automatique</string>
+    <string name="AutoInlineBotDesc">Utilisation automatique du bot inline avec le texte du message.</string>
+    <string name="ShortStandardQuality">SD</string>
+    <string name="ForceFontWeightFallback">Forcer le repli de l\'épaisseur de la police</string>
+    <string name="HideChannelBottomButtons">Cacher les boutons en bas des chaînes</string>
+    <string name="TranslationKeepFormatting">Préserver la mise en forme du texte dans la traduction</string>
+    <string name="PredictiveBackAnimation">Animation de retour prédictive</string>
+    <string name="HideBottomNavigationBar">Cacher la barre de navigation du bas</string>
+    <string name="TabsPosition">Position des onglets</string>
+    <string name="TabsPositionTop">En haut</string>
+    <string name="TabsPositionBottom">En bas</string>
+    <string name="StrokeOnViews">Effets de reflets</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Paramètres d\'accessibilité</string>
 </resources>

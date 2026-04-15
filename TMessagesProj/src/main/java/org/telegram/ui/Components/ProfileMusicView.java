@@ -190,11 +190,8 @@ public class ProfileMusicView extends View {
     public void setText(CharSequence author, CharSequence title) {
         this.author = new Text(author, 11, AndroidUtilities.bold());
         this.title = new Text(title, 11);
-        setContentDescription(
-                LocaleController.getString(R.string.AttachMusic) +
-                        ", " +
-                        LocaleController.formatString(R.string.AccDescrMusicInfo, author, title)
-        );
+
+        setContentDescription(getString(R.string.AccDescrProfileMusic) + " " + author + " — " + title);
     }
 
     private ProfileActivity.AvatarImageView avatarView;

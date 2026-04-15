@@ -318,6 +318,10 @@
     <string name="TranslationKeepFormatting">翻訳時にテキストの書式を保持</string>
     <string name="PredictiveBackAnimation">予測バックアニメーション</string>
     <string name="HideBottomNavigationBar">下部のナビゲーションバーを非表示</string>
+    <string name="TabsPosition">タブの位置</string>
+    <string name="TabsPositionTop">上部</string>
+    <string name="TabsPositionBottom">下部</string>
+    <string name="StrokeOnViews">キラキラエフェクト</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">ユーザー補助の設定</string>
 </resources>
